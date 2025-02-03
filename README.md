@@ -1,3 +1,106 @@
+# Reddit Content Analysis and Blog Generator
+
+## Overview
+This application automates content analysis and blog generation from Reddit posts and comments. Using a structured multi-agent workflow, it extracts key insights, performs semantic analysis, and generates structured Markdown-formatted blog posts.
+
+## Features
+- **Reddit API Integration**: Securely fetches user submissions and comments.
+- **Automated Analysis Pipeline**: Multi-stage processing for semantic enrichment, metric extraction, and blog generation.
+- **Local LLM Integration**: Utilizes Ollama API for AI-powered content generation.
+- **Database Storage**: Saves analysis history in SQLite for future reference.
+- **Interactive UI**: Built with Streamlit for an intuitive user experience.
+- **Markdown Formatting**: Automatically structures output for readability and publication.
+
+## Installation
+### Prerequisites
+Ensure you have the following installed:
+- Python 3.8+
+- Ollama (for local LLM execution)
+- Reddit API credentials (stored in `.env` file)
+
+### Setup
+1. Clone the repository:
+   ```shell
+   git clone https://github.com/kliewerdaniel/RedToBlog02.git
+   cd RedToBlog02
+   ```
+2. Install dependencies:
+   ```shell
+   pip install -r requirements.txt
+   ```
+3. Configure the Ollama model:
+   ```shell
+   ollama pull vanilj/Phi-4:latest
+   ```
+4. Set up Reddit API credentials in a `.env` file:
+   ```plaintext
+   REDDIT_CLIENT_ID=your_client_id
+   REDDIT_CLIENT_SECRET=your_client_secret
+   REDDIT_USER_AGENT=your_user_agent
+   REDDIT_USERNAME=your_username
+   REDDIT_PASSWORD=your_password
+   ```
+5. Initialize the database:
+   ```shell
+   python -c "import reddit_blog_app; reddit_blog_app.init_db()"
+   ```
+6. Run the application:
+   ```shell
+   streamlit run reddit_blog_app.py
+   ```
+
+## Usage
+1. Open the Streamlit interface.
+2. Select the number of Reddit posts to analyze.
+3. Click **Start Analysis** to fetch and process content.
+4. View extracted metrics and generated blog posts.
+5. Access previous analyses in the **History** tab.
+
+## Architecture
+### System Components
+- **RedditManager**: Handles API authentication and content retrieval.
+- **BlogGenerator**: Orchestrates AI-driven analysis and blog generation.
+- **AI Agents**:
+  - `ExpandAgent`: Enhances raw text with contextual information.
+  - `AnalyzeAgent`: Extracts semantic and psychological insights.
+  - `MetricAgent`: Quantifies key metrics from the analysis.
+  - `FinalAgent`: Generates structured blog content.
+  - `FormatAgent`: Formats content into Markdown for readability.
+- **SQLite Database**: Stores analysis results for future retrieval.
+- **Streamlit UI**: Provides an interactive front-end for user interaction.
+
+## Use Cases
+### Personal Analytics
+- Track sentiment and emotional trends over time.
+- Identify cognitive biases in writing.
+- Monitor personal development through linguistic patterns.
+
+### Content Creation
+- Generate automated blog posts from Reddit activity.
+- Convert discussions into structured articles.
+- Improve writing efficiency with AI-assisted summarization.
+
+### Community Analysis
+- Detect emerging topics and trends in subreddits.
+- Analyze sentiment shifts in online discussions.
+- Measure engagement and controversy metrics.
+
+### Professional Applications
+- Market research through subreddit analysis.
+- Customer sentiment tracking for businesses.
+- Competitive analysis based on Reddit discussions.
+
+## Future Enhancements
+- **Advanced NLP Features**: Sentiment analysis, topic modeling, and bias detection.
+- **Cross-Platform Integration**: Support for Twitter, Hacker News, and other platforms.
+- **Enhanced Database Queries**: Advanced search and filtering for historical analyses.
+- **User Authentication**: Multi-user support with secure login.
+- **Deployment Options**: Docker containerization and cloud hosting.
+
+
+## License
+This project is licensed under the MIT License. See `LICENSE` for details.
+
 
 ```python
 
@@ -209,110 +312,6 @@ if __name__ == "__main__":
 
 
 ```
-
-
-# Reddit Content Analysis and Blog Generator
-
-## Overview
-This application automates content analysis and blog generation from Reddit posts and comments. Using a structured multi-agent workflow, it extracts key insights, performs semantic analysis, and generates structured Markdown-formatted blog posts.
-
-## Features
-- **Reddit API Integration**: Securely fetches user submissions and comments.
-- **Automated Analysis Pipeline**: Multi-stage processing for semantic enrichment, metric extraction, and blog generation.
-- **Local LLM Integration**: Utilizes Ollama API for AI-powered content generation.
-- **Database Storage**: Saves analysis history in SQLite for future reference.
-- **Interactive UI**: Built with Streamlit for an intuitive user experience.
-- **Markdown Formatting**: Automatically structures output for readability and publication.
-
-## Installation
-### Prerequisites
-Ensure you have the following installed:
-- Python 3.8+
-- Ollama (for local LLM execution)
-- Reddit API credentials (stored in `.env` file)
-
-### Setup
-1. Clone the repository:
-   ```shell
-   git clone https://github.com/kliewerdaniel/RedToBlog02.git
-   cd RedToBlog02
-   ```
-2. Install dependencies:
-   ```shell
-   pip install -r requirements.txt
-   ```
-3. Configure the Ollama model:
-   ```shell
-   ollama pull vanilj/Phi-4:latest
-   ```
-4. Set up Reddit API credentials in a `.env` file:
-   ```plaintext
-   REDDIT_CLIENT_ID=your_client_id
-   REDDIT_CLIENT_SECRET=your_client_secret
-   REDDIT_USER_AGENT=your_user_agent
-   REDDIT_USERNAME=your_username
-   REDDIT_PASSWORD=your_password
-   ```
-5. Initialize the database:
-   ```shell
-   python -c "import reddit_blog_app; reddit_blog_app.init_db()"
-   ```
-6. Run the application:
-   ```shell
-   streamlit run reddit_blog_app.py
-   ```
-
-## Usage
-1. Open the Streamlit interface.
-2. Select the number of Reddit posts to analyze.
-3. Click **Start Analysis** to fetch and process content.
-4. View extracted metrics and generated blog posts.
-5. Access previous analyses in the **History** tab.
-
-## Architecture
-### System Components
-- **RedditManager**: Handles API authentication and content retrieval.
-- **BlogGenerator**: Orchestrates AI-driven analysis and blog generation.
-- **AI Agents**:
-  - `ExpandAgent`: Enhances raw text with contextual information.
-  - `AnalyzeAgent`: Extracts semantic and psychological insights.
-  - `MetricAgent`: Quantifies key metrics from the analysis.
-  - `FinalAgent`: Generates structured blog content.
-  - `FormatAgent`: Formats content into Markdown for readability.
-- **SQLite Database**: Stores analysis results for future retrieval.
-- **Streamlit UI**: Provides an interactive front-end for user interaction.
-
-## Use Cases
-### Personal Analytics
-- Track sentiment and emotional trends over time.
-- Identify cognitive biases in writing.
-- Monitor personal development through linguistic patterns.
-
-### Content Creation
-- Generate automated blog posts from Reddit activity.
-- Convert discussions into structured articles.
-- Improve writing efficiency with AI-assisted summarization.
-
-### Community Analysis
-- Detect emerging topics and trends in subreddits.
-- Analyze sentiment shifts in online discussions.
-- Measure engagement and controversy metrics.
-
-### Professional Applications
-- Market research through subreddit analysis.
-- Customer sentiment tracking for businesses.
-- Competitive analysis based on Reddit discussions.
-
-## Future Enhancements
-- **Advanced NLP Features**: Sentiment analysis, topic modeling, and bias detection.
-- **Cross-Platform Integration**: Support for Twitter, Hacker News, and other platforms.
-- **Enhanced Database Queries**: Advanced search and filtering for historical analyses.
-- **User Authentication**: Multi-user support with secure login.
-- **Deployment Options**: Docker containerization and cloud hosting.
-
-
-## License
-This project is licensed under the MIT License. See `LICENSE` for details.
 
 ---
 For more information, visit the [GitHub Repository](https://github.com/kliewerdaniel/RedToBlog02).
