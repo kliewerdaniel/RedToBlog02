@@ -211,140 +211,115 @@ if __name__ == "__main__":
 ```
 
 
-# Comprehensive Guide to the Reddit Content Analysis System
+# Reddit Content Analysis and Blog Generator
 
-## 1. Architecture Overview
-This program combines web scraping, data analysis, and natural language processing in a Streamlit-based web interface. Key components:
+## Overview
+This application automates content analysis and blog generation from Reddit posts and comments. Using a structured multi-agent workflow, it extracts key insights, performs semantic analysis, and generates structured Markdown-formatted blog posts.
 
-- **Reddit API Integration**: Uses PRAW library for secure Reddit access
-- **Data Pipeline**: Multi-stage processing workflow with specialized AI agents
-- **Database**: SQLite for storing analysis history
-- **LLM Integration**: Local Ollama API for content generation
-- **Visualization**: Plotly and Streamlit for data presentation
+## Features
+- **Reddit API Integration**: Securely fetches user submissions and comments.
+- **Automated Analysis Pipeline**: Multi-stage processing for semantic enrichment, metric extraction, and blog generation.
+- **Local LLM Integration**: Utilizes Ollama API for AI-powered content generation.
+- **Database Storage**: Saves analysis history in SQLite for future reference.
+- **Interactive UI**: Built with Streamlit for an intuitive user experience.
+- **Markdown Formatting**: Automatically structures output for readability and publication.
 
-## 2. Core Components Breakdown
+## Installation
+### Prerequisites
+Ensure you have the following installed:
+- Python 3.8+
+- Ollama (for local LLM execution)
+- Reddit API credentials (stored in `.env` file)
 
-### 2.1 Reddit Integration (RedditManager)
-- Authentication via .env file credentials
-- Fetches both submissions and comments
-- Configurable post limit (default 10 each)
-- Returns combined text content for analysis
+### Setup
+1. Clone the repository:
+   ```shell
+   git clone https://github.com/kliewerdaniel/RedToBlog02.git
+   cd RedToBlog02
+   ```
+2. Install dependencies:
+   ```shell
+   pip install -r requirements.txt
+   ```
+3. Configure the Ollama model:
+   ```shell
+   ollama pull vanilj/Phi-4:latest
+   ```
+4. Set up Reddit API credentials in a `.env` file:
+   ```plaintext
+   REDDIT_CLIENT_ID=your_client_id
+   REDDIT_CLIENT_SECRET=your_client_secret
+   REDDIT_USER_AGENT=your_user_agent
+   REDDIT_USERNAME=your_username
+   REDDIT_PASSWORD=your_password
+   ```
+5. Initialize the database:
+   ```shell
+   python -c "import reddit_blog_app; reddit_blog_app.init_db()"
+   ```
+6. Run the application:
+   ```shell
+   streamlit run reddit_blog_app.py
+   ```
 
-### 2.2 Processing Workflow
-Seven-stage pipeline managed through networkx DAG:
-1. **Content Expansion**: Enriches raw text with context
-2. **Semantic Analysis**: Identifies themes and patterns
-3. **Metric Extraction**: Quantifies key insights
-4. **Blog Generation**: Creates initial draft content 
-5. **Formatting**: Applies Markdown styling
-6. **Storage**: SQLite database persistence
-7. **Visualization**: Interactive Streamlit presentation
+## Usage
+1. Open the Streamlit interface.
+2. Select the number of Reddit posts to analyze.
+3. Click **Start Analysis** to fetch and process content.
+4. View extracted metrics and generated blog posts.
+5. Access previous analyses in the **History** tab.
 
-### 2.3 AI Agent System
-- BaseAgent handles Ollama API communication
-- Specialized agents for each processing stage:
-  - ExpandAgent: Contextual enrichment
-  - AnalyzeAgent: Pattern recognition
-  - MetricAgent: Data quantification
-  - FinalAgent: Content generation
-  - FormatAgent: Presentation styling
+## Architecture
+### System Components
+- **RedditManager**: Handles API authentication and content retrieval.
+- **BlogGenerator**: Orchestrates AI-driven analysis and blog generation.
+- **AI Agents**:
+  - `ExpandAgent`: Enhances raw text with contextual information.
+  - `AnalyzeAgent`: Extracts semantic and psychological insights.
+  - `MetricAgent`: Quantifies key metrics from the analysis.
+  - `FinalAgent`: Generates structured blog content.
+  - `FormatAgent`: Formats content into Markdown for readability.
+- **SQLite Database**: Stores analysis results for future retrieval.
+- **Streamlit UI**: Provides an interactive front-end for user interaction.
 
-### 2.4 Database Structure
-SQLite table schema:
-- Timestamp: Analysis datetime
-- Metrics: JSON-formatted insights
-- Final Blog: Formatted Markdown
-- Status: Process completion state
+## Use Cases
+### Personal Analytics
+- Track sentiment and emotional trends over time.
+- Identify cognitive biases in writing.
+- Monitor personal development through linguistic patterns.
 
-## 3. Execution Flow
-1. User sets parameters via Streamlit sidebar
-2. Reddit content collection through PRAW
-3. Multi-stage LLM processing pipeline
-4. Results storage and visualization
-5. Historical data retrieval system
+### Content Creation
+- Generate automated blog posts from Reddit activity.
+- Convert discussions into structured articles.
+- Improve writing efficiency with AI-assisted summarization.
 
-## 4. Alternative Use Cases
+### Community Analysis
+- Detect emerging topics and trends in subreddits.
+- Analyze sentiment shifts in online discussions.
+- Measure engagement and controversy metrics.
 
-### 4.1 Personal Analytics
-- Track emotional states over time
-- Identify cognitive biases in writing
-- Monitor personal development progress
-- Analyze communication style evolution
+### Professional Applications
+- Market research through subreddit analysis.
+- Customer sentiment tracking for businesses.
+- Competitive analysis based on Reddit discussions.
 
-### 4.2 Content Creation
-- Automated social media post generation
-- Newsletter content production
-- Idea generation for creative writing
-- Video script outlining
+## Future Enhancements
+- **Advanced NLP Features**: Sentiment analysis, topic modeling, and bias detection.
+- **Cross-Platform Integration**: Support for Twitter, Hacker News, and other platforms.
+- **Enhanced Database Queries**: Advanced search and filtering for historical analyses.
+- **User Authentication**: Multi-user support with secure login.
+- **Deployment Options**: Docker containerization and cloud hosting.
 
-### 4.3 Community Analysis
-- Subreddit trend identification
-- Controversy detection in discussions
-- Sentiment analysis across communities
-- Network mapping of user interactions
+## Contributing
+Contributions are welcome! To contribute:
+1. Fork the repository.
+2. Create a new branch.
+3. Implement your changes and commit them.
+4. Submit a pull request for review.
 
-### 4.4 Professional Applications
-- Market research from niche communities
-- Customer feedback analysis
-- Brand perception monitoring
-- Competitor strategy insights
+## License
+This project is licensed under the MIT License. See `LICENSE` for details.
 
-## 5. Advanced Modifications
+---
+For more information, visit the [GitHub Repository](https://github.com/kliewerdaniel/RedToBlog02).
 
-### 5.1 Enhanced Analysis
-- Add sentiment analysis layer
-- Implement topic modeling (LDA/NMF)
-- Integrate personality prediction models
-- Add cross-platform comparison (Twitter, HN)
-
-### 5.2 Deployment Options
-- Docker containerization
-- Cloud deployment (AWS/GCP)
-- Scheduled daily analysis via Cron
-- Email newsletter integration
-
-### 5.3 Security Improvements
-- User authentication system
-- Data encryption at rest
-- API rate limiting
-- Content anonymization
-
-## 6. Setup Guide
-
-1. Install dependencies:
-```bash
-pip install -r requirements.txt
-```
-
-2. Configure Ollama:
-```bash
-ollama pull vanilj/Phi-4:latest
-```
-
-3. Populate .env file with Reddit credentials
-
-4. Launch application:
-```bash
-streamlit run reddit_blog_app.py
-```
-
-## 7. Customization Opportunities
-
-- **Template System**: Add multiple blog format templates
-- **Multi-User Support**: Implement account system
-- **API Expansion**: Add Twitter/Medium integrations
-- **Advanced Metrics**: 
-  - Readability scores
-  - Engagement predictions
-  - Controversy index
-  - Topic diversity metrics
-
-## 8. Ethical Considerations
-
-- Respect Reddit API terms of service
-- Implement content anonymization
-- Add opt-out mechanisms
-- Include data deletion features
-- Monitor for biased LLM outputs
-
-This system provides a foundation for automated content analysis and generation, adaptable to various text-based data sources beyond Reddit. The modular architecture allows for customization while maintaining core functionality.
