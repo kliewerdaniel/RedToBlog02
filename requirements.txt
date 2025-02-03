@@ -1,0 +1,10 @@
+# requirements.txt
+streamlit==1.25.0
+pandas
+plotly>=5.13.0
+networkx
+requests
+praw
+python-dotenv
+sqlalchemy
+textwrap
