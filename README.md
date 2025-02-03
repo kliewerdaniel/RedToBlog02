@@ -310,12 +310,6 @@ Ensure you have the following installed:
 - **User Authentication**: Multi-user support with secure login.
 - **Deployment Options**: Docker containerization and cloud hosting.
 
-## Contributing
-Contributions are welcome! To contribute:
-1. Fork the repository.
-2. Create a new branch.
-3. Implement your changes and commit them.
-4. Submit a pull request for review.
 
 ## License
 This project is licensed under the MIT License. See `LICENSE` for details.
