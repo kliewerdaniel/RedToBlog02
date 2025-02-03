@@ -1,5 +1,10 @@
 # Reddit Content Analysis and Blog Generator
 
+
+![ Alt Text](/Screenshot 2025-02-03 at 14.55.12.png)
+
+![ Alt Text](/Screenshot 2025-02-03 at 14.56.02.png)
+
 ## Overview
 This application automates content analysis and blog generation from Reddit posts and comments. Using a structured multi-agent workflow, it extracts key insights, performs semantic analysis, and generates structured Markdown-formatted blog posts.
 
